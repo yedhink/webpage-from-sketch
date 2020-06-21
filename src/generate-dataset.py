@@ -49,7 +49,7 @@ class GenDataset:
             self.row_count = 0
             self.background = Image.open(ASSETS_PATH + "white_background.png")
             print(f"""
-{filename} -> {OUTPUT_PATH}{count}.png
+                {filename} -> {OUTPUT_PATH}{count}.png
             """)
             count += 1
             with open(filename) as file:
@@ -117,13 +117,11 @@ class GenDataset:
                     if itr + 4 > length:
                         break
                     print(f"""
-{itr} < {length} : {lines[itr]}
+                        {itr} < {length} : {lines[itr]}
                     """)
             self.background.show()
             if count == 1:
                 break
-            # self.background.save(f"{OUTPUT_PATH}{count}.png")
-            # shutil.copy(filename, f"{OUTPUT_PATH}{count}.gui")
 
     def overlay(self, times, fg_path):
         """

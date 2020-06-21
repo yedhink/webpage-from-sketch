@@ -5,6 +5,8 @@ from __future__ import absolute_import
 from argparse import ArgumentParser
 
 from utils.training.CNNModel import *
+from utils.training.ModelUtils import *
+import os
 
 VAL_SPLIT = 0.2
 

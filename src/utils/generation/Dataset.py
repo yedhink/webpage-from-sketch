@@ -2,17 +2,16 @@ from __future__ import absolute_import
 
 import os
 import shutil
-import pdb
 import hashlib
 import numpy as np
 
-from keras.preprocessing.text import Tokenizer, one_hot
+from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.utils import to_categorical
 
-from .ImagePreprocessor import *
+from PreProcessor import *
 
-VOCAB_FILE = '../vocabulary.vocab'
+VOCAB_FILE = '../../vocabulary.vocab'
 TRAINING_SET_NAME = "training_set"
 VALIDATION_SET_NAME = "validation_set"
 BATCH_SIZE = 64
@@ -42,10 +41,10 @@ class Dataset:
 
     def preprocess_data(self, training_path, validation_path,
                         training_augmentation):
-        train_img_preprocessor = ImagePreprocessor()
+        train_img_preprocessor = PreProcessor()
         train_img_preprocessor.build_image_dataset(
             training_path, augment_data=training_augmentation)
-        val_img_preprocessor = ImagePreprocessor()
+        val_img_preprocessor = PreProcessor()
         val_img_preprocessor.build_image_dataset(
             validation_path, augment_data=0)
 

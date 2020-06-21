@@ -10,9 +10,9 @@ from keras.models import model_from_json
 from keras.preprocessing.sequence import pad_sequences
 
 from utils.dataset.Dataset import *
-from utils.dataset.ImagePreprocessor import *
-from .Evaluator import *
-from .Compiler import *
+from utils.dataset.PreProcessor import *
+from .Scorer import *
+from .HTMLCompiler import *
 
 MAX_LENGTH = 48
 
@@ -49,7 +49,7 @@ class Sampler:
 
         if (get_corpus_bleu == 1) and (original_guis_filepath is not None):
             print("BLEU score: {}".format(
-                Evaluator.get_corpus_bleu(original_guis_filepath, op_dir)))
+                Scorer.get_corpus_bleu(original_guis_filepath, op_dir)))
 
     def convert_single_image(self, op_dir, input_img, print_generated_output,
                              get_sentence_bleu, original_gui_filepath, style):
@@ -79,8 +79,8 @@ class Sampler:
         # Get BLEU
         if get_sentence_bleu == 1 and (original_gui_filepath is not None):
             print("BLEU score: {}".format(
-                Evaluator.get_sentence_bleu(original_gui_filepath,
-                                            gui_output_filepath)))
+                Scorer.get_sentence_bleu(original_gui_filepath,
+                                         gui_output_filepath)))
 
     def load_model(self, model_json_path, model_weights_path):
         json_file = open(model_json_path, 'r')
@@ -93,7 +93,7 @@ class Sampler:
 
     def generate_gui(self, input_img, print_generated_output, sample_id,
                      op_dir):
-        test_img_preprocessor = ImagePreprocessor()
+        test_img_preprocessor = PreProcessor()
         img_features = test_img_preprocessor.get_img_features(input_img)
 
         in_text = '<START> '
@@ -128,8 +128,8 @@ class Sampler:
                       op_dir,
                       style='default'):
 
-        compiler = Compiler(style)
-        compiled_website = compiler.compile(gui_array)
+        HTMLCompiler = HTMLCompiler(style)
+        compiled_website = HTMLCompiler.compile(gui_array)
 
         if print_generated_output is 1:
             print("\nCompiled HTML:")

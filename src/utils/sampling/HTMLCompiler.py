@@ -4,15 +4,18 @@ from __future__ import absolute_import
 import os
 import json
 
-from .Node import *
+from SingleElement import *
 
 BASE_DIR_NAME = os.path.dirname(__file__)
-DEFAULT_DSL_MAPPING_FILEPATH = "{}/styles/default-dsl-mapping.json".format(BASE_DIR_NAME)
-FACEBOOK_DSL_MAPPING_FILEPATH = "{}/styles/facebook_dsl_mapping.json".format(BASE_DIR_NAME)
-AIRBNB_DSL_MAPPING_FILEPATH = "{}/styles/airbnb_dsl_mapping.json".format(BASE_DIR_NAME)
+DEFAULT_DSL_MAPPING_FILEPATH = "{}/styles/default-dsl-mapping.json".format(
+    BASE_DIR_NAME)
+FACEBOOK_DSL_MAPPING_FILEPATH = "{}/styles/facebook_dsl_mapping.json".format(
+    BASE_DIR_NAME)
+AIRBNB_DSL_MAPPING_FILEPATH = "{}/styles/airbnb_dsl_mapping.json".format(
+    BASE_DIR_NAME)
 
 
-class Compiler:
+class HTMLCompiler:
     def __init__(self, style):
         style_json = self.get_stylesheet(style)
         with open(style_json) as data_file:
@@ -22,7 +25,7 @@ class Compiler:
         self.closing_tag = self.dsl_mapping["closing-tag"]
         self.content_holder = self.opening_tag + self.closing_tag
 
-        self.root = Node("body", None, self.content_holder)
+        self.root = SingleElement("body", None, self.content_holder)
 
     def get_stylesheet(self, style):
         if style == 'default':
@@ -49,7 +52,8 @@ class Compiler:
 
             if token.find(self.opening_tag) != -1:
                 token = token.replace(self.opening_tag, "")
-                element = Node(token, current_parent, self.content_holder)
+                element = SingleElement(token, current_parent,
+                                        self.content_holder)
                 current_parent.add_child(element)
                 current_parent = element
             elif token.find(self.closing_tag) != -1:
@@ -57,7 +61,8 @@ class Compiler:
             else:
                 tokens = token.split(",")
                 for t in tokens:
-                    element = Node(t, current_parent, self.content_holder)
+                    element = SingleElement(t, current_parent,
+                                            self.content_holder)
                     current_parent.add_child(element)
 
         output_html = self.root.render(self.dsl_mapping)

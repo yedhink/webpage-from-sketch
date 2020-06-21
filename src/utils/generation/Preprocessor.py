@@ -10,7 +10,7 @@ import cv2
 from keras.preprocessing.image import ImageDataGenerator
 
 
-class ImagePreprocessor:
+class PreProcessor:
     def __init__(self):
         pass
 

@@ -2,9 +2,8 @@ from __future__ import print_function
 from __future__ import absolute_import
 
 from argparse import ArgumentParser
-from nltk.translate.bleu_score import sentence_bleu, corpus_bleu
 
-from utils.sampling.Evaluator import *
+from utils.sampling.Scorer import *
 
 
 def build_parser():
@@ -31,8 +30,8 @@ def main():
     original_gui_filepath = options.original_gui_filepath
     predicted_gui_filepath = options.predicted_gui_filepath
 
-    bleu_score = Evaluator.get_sentence_bleu(original_gui_filepath,
-                                             predicted_gui_filepath)
+    bleu_score = Scorer.get_sentence_bleu(original_gui_filepath,
+                                          predicted_gui_filepath)
     print("BLEU score for single GUI: {}".format(bleu_score))
 
 

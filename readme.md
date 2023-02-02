@@ -1,6 +1,6 @@
 # Webpage From Sketch
 
-Special kinda cooked ramen codebase. Use at your own discretion, because I neither me nor mere mortals can figure out what's going on in this codebase after a while!
+Special kinda cooked ramen codebase. Use at your own discretion, because neither me nor mere mortals can figure out what's going on in this codebase after a while! I am kidding. It's not that badly written compared to my other projects :D 
 
 ## Authors
 * @yedhink
